@@ -1,6 +1,8 @@
 import os
 # Django settings for club_velo project.
 
+IMAGE_MAX_SIZE = (800, 600)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
