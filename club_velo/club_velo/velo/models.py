@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
+from django.core.files.uploadedfile import SimpleUploadedFile
+from StringIO import StringIO
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.db.models import Max
 from club_velo import settings
+
+from imagekit.models import ImageSpecField, ProcessedImageField
+from imagekit.processors import ResizeToFill
+
 import Image
 import os
 
@@ -46,6 +52,15 @@ class Velo(models.Model):
         else:
             return no['numero__max'] + 1
 
+    def admin_thumbnail(self):
+        if self.photo_miniature.url:
+            return u'<a href="%s"><img src="%s" /></a>' % (self.photo.url, self.photo_miniature.url)
+        else:
+            return ""
+
+    admin_thumbnail.short_description = 'Photo'
+    admin_thumbnail.allow_tags = True
+
     def __unicode__(self):
         return "Velo : %s %s %s" % (self.numero,self.marque, self.type)
 
@@ -55,7 +70,14 @@ class Velo(models.Model):
     couleur = models.ForeignKey(Couleur)
     date_dentree =  models.DateField(verbose_name="Date d'entrée au club")
 
-    photo = models.ImageField(upload_to='./',blank=True, null=True)
+    photo = ProcessedImageField(upload_to='velo', blank=True, null=True,
+            processors=[ResizeToFill(1024,768)],
+            format='JPEG',
+            options={'quality':70})
+
+    photo_miniature = ImageSpecField(image_field='photo',
+            processors=[ResizeToFill(150,150)],
+            options={'quality':70})
 
     tailleDeRoue = models.ForeignKey('TailleDeRoue', blank=True, null=True, verbose_name="taille de roue")
     vitesse = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(1)])
@@ -72,22 +94,13 @@ class Velo(models.Model):
 
     remarque = models.TextField(blank=True)
 
-
-    def save(self, *args, **kwargs):
-
-        if self.id:
-            previous = Velo.objects.get(id=self.id)  
-            have_changed = self.photo and self.photo != previous.photo
-        else:
-            have_changed = True
-
-        super(Velo, self).save(*args, **kwargs)
-        
-        if self.id is not None:  
-            if have_changed:
-                image = Image.open(self.photo.path)  
-                image.thumbnail(settings.IMAGE_MAX_SIZE, Image.ANTIALIAS)  
-                image.save(self.photo.path)  
+    louer = models.BooleanField(verbose_name="loué")
+    louable = models.BooleanField()
+    date_de_retour = models.DateField(blank=True, null=True)
+    mail_locataire = models.EmailField(blank=True, null=True)
+    tel_locataire = models.CharField(max_length=32, blank=True, null=True)
+    prenom_locataire = models.CharField(max_length=64, blank=True, null=True)
+    nom_locataire = models.CharField(max_length=64, blank=True, null=True)
                 
     
 class TailleDeRoue(models.Model):
@@ -102,7 +115,7 @@ class Reparation(models.Model):
     velo = models.ForeignKey(Velo)
 
     def __unicode__(self):
-        return "Reparation : %s %s"%(date, velo)
+        return "Reparation : %s %s"%(self.date, self.velo)
 
 class TypeDeFrein(models.Model):
     typeDeFrein = models.CharField(verbose_name="type de frein", unique=True, max_length=64)

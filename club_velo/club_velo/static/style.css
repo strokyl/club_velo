@@ -1,0 +1,236 @@
+html, body
+{
+    background-color: #96c7f2;
+    padding:0px;
+    margin:0px;
+    background-position:bottom;
+    background-attachment:scroll;
+    font-family: "arial";
+    font-size:16px;
+    height:100%;
+}
+
+#wrapper
+{
+    min-height: 100%;
+    position: relative;
+    padding:36px 0px 90px 0px;
+}
+
+
+a
+{
+    color:#3b08d2;
+}
+
+#bottom_background
+{
+    position: absolute;
+    width:100%;
+    height:80px;
+    bottom:0px;
+    left:0px;
+    background-image: url('herbe.jpg');
+    background-repeat: repeat-x;
+}
+
+#top_background
+{
+    position: absolute;
+    z-index:1;
+    width:100%;
+    height:582px;
+    top:0px;
+    left:0px;
+    background-image: url('degrade.png');
+    background-repeat: repeat-x;
+}
+
+#top{
+    position: relative;
+    z-index:1;
+    margin:0 auto;
+    width: 960px;
+    background-color: #dcdcdc;
+    height: 147px;
+}
+
+#bordure_top
+{
+    position: absolute;
+    z-index:-1;
+    top:0px;
+    left:0px;
+    background-image: url("bordure_haut.gif");
+    width:100%;
+    height:20px;
+}
+
+#photo
+{
+    width:151px;
+    margin-left : 25px;
+    margin-top : 20px;
+    float : left;
+    height:113px;
+    background-image: url("photo.jpg");
+}
+
+#bordure_right
+{
+    background-image: url("bordure_droite.gif");
+    z-index:-1;
+    position: absolute;
+    width:7px;
+    height:155px;
+    top:0px;
+    right: -7px;
+}
+
+#bordure_bottom
+{
+    position: absolute;
+    z-index:-1;
+    background-image: url("bordure_bas.gif");
+    width:100%;
+    height: 8px;
+    bottom:-8px;
+}
+
+#top_title
+{
+    font-family: "arial";
+    font-size: 60px;
+    padding-top : 15px;
+    text-align: center;
+    margin-left:180px;
+    color:#3b08d2;
+}
+
+#contenu img
+{
+    padding: 10px;
+}
+
+#menu
+{
+    margin: 25px 0 0 0;
+    padding: 0px;
+    list-style-type: none;
+    font-family: "arial";
+    font-size: 12px;
+}
+
+#menu li
+{
+    float: left;
+}
+
+#menu a
+{
+    font-size:22px;
+    color:#3b08d2;
+    text-decoration: none;
+    display: block;
+    padding-left:32px;
+}
+
+#menu a:hover
+{
+    text-decoration: underline;
+}
+
+#centre
+{
+    position: relative;
+    z-index:1;
+    margin: 13px auto 0 auto;
+    width: 960px;
+    background-color: #dcdcdc;
+    min-height: 414px;
+}
+
+#contenu
+{
+    padding:20px;
+}
+
+#ombre_degrade
+{
+    position: absolute;
+    background-image: url("degrade_ombre.gif");
+    width:7px;
+    height:386px;
+    top:0px;
+    right:-7px;
+    z-index:-1;
+}
+
+#ombre_repete
+{
+    position: absolute;
+    background-repeat: repeat-y;
+    background-image: url("ombre_repet.gif");
+    width:7px;
+    height:100%;
+    right:-7px;
+    z-index:-2;
+}
+#bordure_centre_bas
+{
+    position: absolute;
+    z-index:-1;
+    background-image: url("bordure_centre_bas.gif");
+    min-width:967px;
+    min-height: 28px;
+    bottom:-8px;
+}
+
+h1
+{
+    font-family: "arial";
+    font-size: 40px;
+    color:#3b08d2;
+    text-align:right;
+    font-weight: normal;
+}
+
+td, th
+{
+    text-align:left;
+    padding:10px;
+}
+
+th
+{
+    font-weight: bold;
+    font-size:22px;
+    text-align:left;
+}
+
+.time
+{
+    font-size:18px;
+    font-style:italic;
+    min-width:100px;
+}
+
+h2
+{
+    font-family: "arial";
+    font-size: 35px;
+    color:#3b08d2;
+    text-align:left;
+    font-weight: normal;
+}
+
+.competence th
+{
+    width: 200px;
+}
+
+#contact
+{
+    font-size: 20px;
+    line-height:30px;
+}
